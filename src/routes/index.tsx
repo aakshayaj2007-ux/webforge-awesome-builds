@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { Hero } from "@/components/site/Hero";
+import {
+  Faq,
+  Portfolio,
+  Pricing,
+  Process,
+  Services,
+  Testimonials,
+  TrustBar,
+  WhyUs,
+} from "@/components/site/Sections";
+import { Contact } from "@/components/site/Contact";
+import { SiteFooter } from "@/components/site/SiteFooter";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "WebForge — Website Design for Small Businesses in India";
+const description =
+  "WebForge builds fast, mobile-ready websites for small businesses in 2-3 weeks. Fixed pricing from ₹8,000, zero hidden charges, 30-day money-back guarantee.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <TrustBar />
+        <Services />
+        <WhyUs />
+        <Portfolio />
+        <Testimonials />
+        <Pricing />
+        <Process />
+        <Faq />
+        <Contact />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
